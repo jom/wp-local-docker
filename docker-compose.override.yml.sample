@@ -7,6 +7,6 @@ services:
     environment:
       VIRTUAL_HOST: "wp.localhost"
 networks:
-  default:
+  frontend:
     external:
       name: nginx-proxy

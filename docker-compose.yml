@@ -7,6 +7,8 @@ services:
     restart: always
     ports:
       - "3306"
+    networks:
+      - backend
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
@@ -18,6 +20,8 @@ services:
       - mysql
     volumes_from:
       - volumes_container
+    networks:
+      - backend
     volumes:
       - "./wordpress:/var/www/html"
       - "./config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
@@ -34,6 +38,9 @@ services:
     ports:
       - "80"
       - "443"
+    networks:
+      - frontend
+      - backend
     image: nginx:latest
     volumes_from:
       - volumes_container
@@ -45,3 +52,6 @@ services:
     restart: always
   volumes_container:
     image: busybox
+networks:
+  frontend:
+  backend:
