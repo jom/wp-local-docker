@@ -8,6 +8,10 @@ else
 	docker-compose exec --user www-data phpfpm wp core download
 	docker-compose exec -T --user www-data phpfpm wp core config
 
+	# Ask for the host
+	echo -n "Enter site host (example.local) and press [ENTER]: "
+	read HOST
+
 	# Ask for the site name
 	echo -n "Enter the site title and press [ENTER]: "
 	read TITLE
@@ -26,10 +30,10 @@ else
 
 	# Install WordPress
 	docker-compose exec --user www-data phpfpm wp db create
-	docker-compose exec --user www-data phpfpm wp core install --url=localhost --title="$TITLE" --admin_user="$ADMIN_USER" --admin_email=$ADMIN_EMAIL --admin_password=$ADMIN_PASSWORD
+	docker-compose exec --user www-data phpfpm wp core install --url="$HOST" --title="$TITLE" --admin_user="$ADMIN_USER" --admin_email=$ADMIN_EMAIL --admin_password=$ADMIN_PASSWORD
 
 	# Adjust settings
-	docker-compose exec --user www-data phpfpm wp rewrite structure "/%postname%/"
+	docker-compose exec --user www-data phpfpm wp rewrite structure "/%year%/%monthnum%/%postname%/"
 
 	# Remove all posts, comments, and terms
 	docker-compose exec --user www-data phpfpm wp site empty --yes
@@ -50,12 +54,10 @@ else
 
 	# Install additional plugins
 	docker-compose exec --user www-data phpfpm wp plugin install developer --activate
-	docker-compose exec --user www-data phpfpm wp plugin install monster-widget --activate
-	docker-compose exec --user www-data phpfpm wp widget add monster sidebar-1
 
 	echo "Installation done."
 	echo "------------------"
 	echo "Username: $ADMIN_USER"
 	echo "Password: $ADMIN_PASSWORD"
-	open http://localhost/wp-login.php
+	open http://$HOST/wp-login.php
 fi

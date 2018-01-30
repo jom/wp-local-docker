@@ -1,0 +1,12 @@
+version: '2'
+services:
+  volumes_container:
+    volumes:
+      - /Users/user/Projects/plugin-example:/var/www/html/wp-content/plugins/plugin-example
+  nginx:
+    environment:
+      VIRTUAL_HOST: "wp.localhost"
+networks:
+  default:
+    external:
+      name: nginx-proxy
