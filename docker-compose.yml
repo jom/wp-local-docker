@@ -12,14 +12,6 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: password
-  mailcatcher:
-     image: schickling/mailcatcher
-     restart: always
-     ports:
-       - "1025:1025"
-       - "1080"
-     environment:
-       MAILCATCHER_PORT: 1025
   phpfpm:
     image: 10up/phpfpm
     depends_on:
