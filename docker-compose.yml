@@ -22,6 +22,7 @@ services:
       - volumes_container
     networks:
       - backend
+      - mail
     volumes:
       - "./wordpress:/var/www/html"
       - "./config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
@@ -55,3 +56,6 @@ services:
 networks:
   frontend:
   backend:
+  mail:
+    external:
+      name: mail
