@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DINGHY_IP=$(dinghy ip)
+DINGHY_IP="127.0.0.1"
 PORT=$(docker-compose port mysql 3306)
 PORT=${PORT/0.0.0.0:/}
 FILE="/tmp/connection.spf"

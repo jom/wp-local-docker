@@ -5,7 +5,7 @@ services:
       - /Users/user/Projects/plugin-example:/var/www/html/wp-content/plugins/plugin-example
   nginx:
     environment:
-      VIRTUAL_HOST: "wp.docker"
+      VIRTUAL_HOST: "wp.localhost"
 networks:
   frontend:
     external:
