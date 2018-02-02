@@ -1,5 +1,6 @@
 #!/bin/bash
 
+DINGHY_IP=$(dinghy ip)
 PORT=$(docker-compose port mysql 3306)
 PORT=${PORT/0.0.0.0:/}
 FILE="/tmp/connection.spf"
@@ -20,7 +21,7 @@ cat > $FILE <<- EOM
 			<key>database</key>
 			<string>wordpress</string>
 			<key>host</key>
-			<string>127.0.0.1</string>
+			<string>$DINGHY_IP</string>
 			<key>kcid</key>
 			<string>7789628153858732430</string>
 			<key>name</key>
