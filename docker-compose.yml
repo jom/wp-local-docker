@@ -1,11 +1,11 @@
 version: '2'
 services:
   mysql:
-    image: mysql:latest
-    volumes:
-      - "./data/db:/var/lib/mysql:cached"
+    image: mysql:5.7
     restart: always
-    user: "1000:50"
+    volumes:
+      - "./data/db:/var/lib/mysql"
+    user: "501:20"
     ports:
       - "3306"
     networks:
@@ -32,8 +32,7 @@ services:
     restart: always
     external_links:
       - proxy_mailhog_1:mailcatcher
-    extra_hosts:
-      - "docker-local.dev:172.18.0.1"
+      - wpjmcom_nginx_1:wpjm-com
   nginx:
     depends_on:
       - phpfpm
