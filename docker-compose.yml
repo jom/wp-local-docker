@@ -27,7 +27,7 @@ services:
     volumes:
       - "./wordpress:/var/www/html:cached"
       - "./config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
-      - "./config/php-fpm/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+      - "./config/php-fpm/docker-php-ext-xdebug-7.1.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
       - ~/.ssh:/root/.ssh
     restart: always
     external_links:
