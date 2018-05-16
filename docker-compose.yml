@@ -17,6 +17,7 @@ services:
       MYSQL_PASSWORD: password
   phpfpm:
     image: 10up/phpfpm:7.1
+    user: "33:33"
     depends_on:
       - mysql
     volumes_from:
@@ -43,8 +44,6 @@ services:
       - frontend
       - backend
     image: nginx:latest
-    environment:
-      VIRTUAL_PORT: 80
     volumes_from:
       - volumes_container
     volumes:
